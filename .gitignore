@@ -2,3 +2,4 @@ node_modules/
 dist/
 coverage/
 ServiceAccountKey (3).json
+.env
