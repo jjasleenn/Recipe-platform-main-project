@@ -45,6 +45,12 @@ export const startScheduler = () => {
   console.log("Scheduler started...");
 };
 
+cron.schedule("* * * * *", () => {
+        console.log("Running custom scheduled task...");
+        // Add your task logic here
+});
+
+
 export const getAllJobs = () => {
   return Object.values(jobs).map(({ task, info }) => ({
     ...info,
