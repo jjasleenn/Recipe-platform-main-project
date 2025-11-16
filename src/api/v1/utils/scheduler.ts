@@ -1,13 +1,12 @@
 import cron from "node-cron";
 
 type ScheduledTask = ReturnType<typeof cron.schedule>;
-
 interface JobInfo {
   name: string;
   schedule: string;
   description: string;
   active: boolean;
-  nextRun?: string;
+  nextRun?: string; 
 }
 
 const jobs: Record<string, { task: ScheduledTask; info: JobInfo }> = {};
@@ -18,7 +17,7 @@ export const createJob = (
   description: string,
   fn: () => void
 ) => {
-  const task = cron.schedule(schedule, fn, { scheduled: true });
+  const task = cron.schedule(schedule, fn)
 
   jobs[name] = {
     task,
@@ -44,4 +43,11 @@ cron.schedule("0 0 * * *", () => {
 // Example function that you might call in app.ts
 export const startScheduler = () => {
   console.log("Scheduler started...");
+};
+
+export const getAllJobs = () => {
+  return Object.values(jobs).map(({ task, info }) => ({
+    ...info,
+    status: task.getStatus()
+  }));
 };
