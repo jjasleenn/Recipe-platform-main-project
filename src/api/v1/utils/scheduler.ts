@@ -1,5 +1,36 @@
 import cron from "node-cron";
 
+type ScheduledTask = ReturnType<typeof cron.schedule>;
+
+interface JobInfo {
+  name: string;
+  schedule: string;
+  description: string;
+  active: boolean;
+  nextRun?: string;
+}
+
+const jobs: Record<string, { task: ScheduledTask; info: JobInfo }> = {};
+
+export const createJob = (
+  name: string,
+  schedule: string,
+  description: string,
+  fn: () => void
+) => {
+  const task = cron.schedule(schedule, fn, { scheduled: true });
+
+  jobs[name] = {
+    task,
+    info: {
+      name,
+      schedule,
+      description,
+      active: true,
+      nextRun: "Next runtime not supported by node-cron",
+    },
+  };
+};
 // Example task: log message every minute
 cron.schedule("* * * * *", () => {
   console.log("Task running every minute:", new Date().toLocaleString());
