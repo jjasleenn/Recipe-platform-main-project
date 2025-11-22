@@ -3,5 +3,3 @@ dist/
 coverage/
 ServiceAccountKey (3).json
 .env
-.env.local
-.env.*.local
