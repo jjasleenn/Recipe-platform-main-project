@@ -21,9 +21,12 @@
   },
   "homepage": "https://github.com/jjasleenn/Recipe-platform-main-project#readme",
   "dependencies": {
+    "@firebase/auth": "^1.11.1",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "firebase": "^12.6.0",
+    "firebase-admin": "^13.6.0",
     "mongoose": "^8.19.4",
     "node-cron": "^4.2.1"
   },

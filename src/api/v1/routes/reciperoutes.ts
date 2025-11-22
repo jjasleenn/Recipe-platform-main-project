@@ -1,5 +1,6 @@
 import express from "express";
 import {getAllRecipes, getRecipeById, createRecipe, updateRecipe, deleteRecipe} from "../controller/recipecontroller";
+import { firebaseAuth } from "../middlewares/firebaseAuth";
 
 const router = express.Router();
 /**
@@ -63,7 +64,7 @@ router.get("/:id", getRecipeById);
  *       201:
  *         description: Recipe created successfully
  */
-router.post("/", createRecipe);
+router.post("/", firebaseAuth, createRecipe);
 /**
  * @swagger
  * /api/v1/recipes/{id}:
@@ -86,7 +87,7 @@ router.post("/", createRecipe);
  *       200:
  *         description: Recipe updated successfully
  */
-router.put("/:id", updateRecipe);
+router.put("/:id",firebaseAuth, updateRecipe);
 /**
  * @swagger
  * /api/v1/recipes/{id}:
@@ -103,6 +104,6 @@ router.put("/:id", updateRecipe);
  *       200:
  *         description: Recipe deleted successfully
  */
-router.delete("/:id", deleteRecipe);
+router.delete("/:id",firebaseAuth, deleteRecipe);
 
 export default router;
