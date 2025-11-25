@@ -47,7 +47,7 @@ export const startScheduler = () => {
 
 cron.schedule("* * * * *", () => {
         console.log("Running custom scheduled task...");
-        // Add your task logic here
+        
 });
 
 
